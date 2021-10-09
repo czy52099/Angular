@@ -13,14 +13,15 @@ export class SupportComponent implements OnInit {
   getstargdt: Stargdata;
   count: number;
   mig: string;
+  show: boolean;
   constructor() { 
+    this.show = false;
     this.mig='';
     this.getstargdt={listNum:0,name:''};
     this.title='';
     this.message='';
     this.count=0;
     let cunt=0;
-    this.array.forEach(m=>{if(m==='a')cunt++;});
     console.log(cunt);
   }
   array=['a','b','c','a'];
@@ -31,6 +32,7 @@ export class SupportComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.show = false;
     this.getstargdt = this.getstargdata();
     this.mig='https://www.sony.jp/header-footer/header/images/logo.png';
     this.title="Support page;";

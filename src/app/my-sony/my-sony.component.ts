@@ -45,7 +45,7 @@ export class MySonyComponent implements OnInit {
     });
     this.name='';
     this.mail='';
-    this.age = NaN;
+    this.age = 0;
   }
   find(val:string) {
     this.firestore.collection('people',
