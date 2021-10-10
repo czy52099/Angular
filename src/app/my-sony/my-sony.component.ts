@@ -18,7 +18,7 @@ export class MySonyComponent implements OnInit {
   mail: string|undefined;
   age :number|undefined ;
   message = '';
-  items: any;
+  items!: any;
   counts:number|undefined;
   constructor(private firestore: AngularFirestore,
               private dialog: MatDialog,
@@ -26,14 +26,20 @@ export class MySonyComponent implements OnInit {
   }
   async ngOnInit() {
     this.items=[];
+    let _items!: People[];
     for(let i=0;i<9;i++){
       await new Promise(resolve => setTimeout(resolve, 300));
-      this.items = this.service.data;
+      _items = this.service.data;
       if(typeof this.service.data !=='undefined' && this.service.data.length !== 0 ){
-        console.log('items[0]:'+JSON.stringify(this.items[0]));
+        // console.log('items:'+JSON.stringify(this.items));
         break;
       }
     }
+    
+     this.items=_items.filter(function(value,index,array){
+        return index<10;
+     });
+    
   }
   onSubmit(val:any) {
     const data = val;
@@ -56,7 +62,7 @@ export class MySonyComponent implements OnInit {
         this.message="can not get data...."
       })
   }
-  delete(id:any) {
+  delete(id:string) {
     let result = confirm('\'コメントを削除しますか？');
     if(result){
       this.firestore.collection('people').doc(id).delete().then(()=>{
