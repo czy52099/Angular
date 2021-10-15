@@ -1,0 +1,38 @@
+<div>
+  <div>{{message}}</div>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+    <mat-form-field style="margin-right:10px; ">
+      <input matInput [(ngModel)]="name" name="name"
+             placeholder="name">
+    </mat-form-field>
+    <mat-form-field style="margin-right: 10px;">
+      <input matInput [(ngModel)]="mail" name="mail"
+             placeholder="mail">
+    </mat-form-field>
+    <mat-form-field style="margin-right: 10px;">
+      <input type="number" matInput [(ngModel)]="age" name="age"
+             placeholder="age">
+    </mat-form-field>
+    <input type="submit" value="click">
+  </form>
+</div>
+<mat-form-field style="margin-right: 10px;">
+  <input type="text" matInput #input placeholder="Name">
+</mat-form-field>
+<button mat-stroked-button (click)="find(input.value)">get</button>
+<mat-card>
+<table>
+  <tr><th>No.</th><th>Name</th><th>Mail</th><th>age</th><th>削除・更新</th></tr>
+  <tr *ngFor="let item of items;index as i">
+    <td>{{i+1}}</td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.mail }}</td>
+    <td>{{ item.age}}</td>
+    <td>
+      <div><button class="btn btn-danger btn-sm" (click)="delete(item.id)">削除</button>
+        <button class="btn-primary btn-sm" (click)="showDlog(item.id,item.name,item.mail, item.age)">編集</button>
+      </div></td>
+  </tr>
+</table>
+</mat-card>
+
