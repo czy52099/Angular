@@ -37,6 +37,5 @@ export class SupportComponent implements OnInit {
     this.mig='https://www.sony.jp/header-footer/header/images/logo.png';
     this.title="Support page;";
     this.message="ようこそ！";
-
   }
 }

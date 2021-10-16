@@ -24,21 +24,23 @@ export class MySonyComponent implements OnInit {
               private dialog: MatDialog,
               private service: MbinfoService,) {
   }
-  async ngOnInit() {
-    this.items=[];
-    let _items!: People[];
-    for(let i=0;i<9;i++){
-      await new Promise(resolve => setTimeout(resolve, 300));
-      _items = this.service.data;
-      if(typeof this.service.data !=='undefined' && this.service.data.length !== 0 ){
-        // console.log('items:'+JSON.stringify(this.items));
-        break;
-      }
-    }
+  ngOnInit() {
     
-     this.items=_items.filter(function(value,index,array){
-        return index<10;
-     });
+    let _items: People[];
+    new Promise((res,rso)=>{
+    _items=this.service.data;
+    res(_items)
+    alert("promise")
+  }).then((val)=>{
+    alert(val)
+  //   this.items= _items.filter((value,index)=>{
+  //     alert("then")
+  //     return index<10;
+  //  })
+    });
+
+
+     
     
   }
   onSubmit(val:any) {
@@ -59,7 +61,7 @@ export class MySonyComponent implements OnInit {
       .subscribe((value) => {
         this.items = value;
       },error => {
-        this.message="can not get data...."
+        this.message="can not get data....";
       })
   }
   delete(id:string) {
@@ -85,7 +87,7 @@ export class MySonyComponent implements OnInit {
       this.message=JSON.stringify(result.id+result.name);
       this.firestore.collection('people').doc(result.id).update(result).then(()=>{
         this.message="Document successfully deleted!";
-        location.reload();;
+        location.reload()
       }).catch(error=>{
         console.error("Error removing document: ", error);
       })

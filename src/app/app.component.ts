@@ -1,5 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {Routes, NavigationStart, Router} from "@angular/router";
+import {Component,  OnInit} from '@angular/core';
+import { NavigationStart, Router} from "@angular/router";
 
 interface DialogData {
   id:string;
