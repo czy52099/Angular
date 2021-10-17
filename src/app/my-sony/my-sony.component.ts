@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import { _TooltipComponentBase } from '@angular/material/tooltip';
 import {MbinfoService} from "../mbinfo.service";
 import {People} from "./people";
 
@@ -24,24 +25,21 @@ export class MySonyComponent implements OnInit {
               private dialog: MatDialog,
               private service: MbinfoService,) {
   }
-  ngOnInit() {
-    
-    let _items: People[];
-    new Promise((res,rso)=>{
-    _items=this.service.data;
-    res(_items)
-    alert("promise")
-  }).then((val)=>{
-    alert(val)
-  //   this.items= _items.filter((value,index)=>{
-  //     alert("then")
-  //     return index<10;
-  //  })
-    });
+  async ngOnInit() {
+    this.items=[];
+    let _items!: People[];
+    for(let i=0;i<9;i++){
+      await new Promise(resolve => setTimeout(resolve, 300));
+      _items = this.service.data;
+      if(typeof this.service.data !=='undefined' && this.service.data.length !== 0 ){
+        break;
+      }
+    }
 
-
-     
-    
+     this.items=_items.filter((value,index,array)=>{
+        return index<10;
+     })
+   this.items.sort()
   }
   onSubmit(val:any) {
     const data = val;
@@ -61,7 +59,7 @@ export class MySonyComponent implements OnInit {
       .subscribe((value) => {
         this.items = value;
       },error => {
-        this.message="can not get data....";
+        this.message="can not get data...."
       })
   }
   delete(id:string) {
@@ -87,7 +85,7 @@ export class MySonyComponent implements OnInit {
       this.message=JSON.stringify(result.id+result.name);
       this.firestore.collection('people').doc(result.id).update(result).then(()=>{
         this.message="Document successfully deleted!";
-        location.reload()
+        location.reload();;
       }).catch(error=>{
         console.error("Error removing document: ", error);
       })
