@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {  FormControl, FormGroup,FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Stargdata } from './stargdata';
 
 @Component({
   selector: 'app-support',
   templateUrl: './support.component.html',
-  styleUrls: ['./support.component.css']
+  styleUrls: ['./support.component.css'],
 })
 export class SupportComponent implements OnInit {
 
@@ -14,6 +15,8 @@ export class SupportComponent implements OnInit {
   count: number;
   mig: string;
   show: boolean;
+  array?:string[];
+  myControl?: FormGroup;
   constructor() { 
     this.show = false;
     this.mig='';
@@ -23,8 +26,9 @@ export class SupportComponent implements OnInit {
     this.count=0;
     let cunt=0;
     console.log(cunt);
+    
+  this.array=['a','b','c','d'];
   }
-  array=['a','b','c','a'];
   getstargdata(): Stargdata{
     let a = 8;
     let name ='chen';
@@ -37,5 +41,17 @@ export class SupportComponent implements OnInit {
     this.mig='https://www.sony.jp/header-footer/header/images/logo.png';
     this.title="Support page;";
     this.message="ようこそ！";
+    this.myControl=new FormGroup({
+      control:new FormControl()
+    })
+  }
+  onSubmit(val:any){
+   Object.keys(val).forEach((v:any)=>{
+     if(val[v]){
+       alert(v)
+     };
+
+   })
+    this.message = JSON.stringify(val);
   }
 }

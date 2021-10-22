@@ -8,7 +8,7 @@ import { AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import { MatDialogModule } from "@angular/material/dialog";
@@ -55,7 +55,8 @@ const routes: Routes = [
     ),
     MatCardModule,
     MatSortModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,ReactiveFormsModule
   ],
   providers: [ AppComponent, { provide: NZ_I18N, useValue: ja_JP } ],
   bootstrap: [AppComponent]

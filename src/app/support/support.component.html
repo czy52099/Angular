@@ -6,3 +6,20 @@
   <div></div>
 </div>
  <div>test</div>
+ <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <table>
+    <tr>
+      <th>check</th>
+      <th>name</th>
+    </tr>
+    <tr *ngFor="let a of array;let idx=index">
+      <td><input type="checkbox" name="{{a}}" value="{{a}}" ngModel /></td>
+      <td>lin{{a}}</td>
+    </tr>
+        <tr>
+      <td></td>
+      <td><input type="submit" value="click" ></td>
+    </tr>
+  </table>
+</form>
+<div>{{ message }}</div>
