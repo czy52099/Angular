@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormControl, FormGroup,FormsModule,ReactiveFormsModule } from '@angular/forms';
+import {  FormControl, FormGroup } from '@angular/forms';
 import { Stargdata } from './stargdata';
 
 @Component({
@@ -49,8 +49,7 @@ export class SupportComponent implements OnInit {
    Object.keys(val).forEach((v:any)=>{
      if(val[v]){
        alert(v)
-     };
-
+     }
    })
     this.message = JSON.stringify(val);
   }
